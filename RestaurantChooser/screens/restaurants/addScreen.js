@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomTextInput from '../../components/customTextInput';
 import CustomButton from '../../components/customButton';
 import Toast from 'react-native-toast-message';
-import { validateName, validatePhone, validateAddress, validateWebsite } from './validators';
+import { validateName, validatePhone, validateAddress, validateWebsite } from './validators.js';
 
 const AddScreen = ({ navigation }) => {
   const [formData, setFormData] = useState({
@@ -86,33 +86,22 @@ const AddScreen = ({ navigation }) => {
         maxLength={50}
       />
       
-      <CustomTextInput
-        label="Cuisine Type"
-        stateHolder={{ setState: setFormData }}
-        stateFieldName="cuisine"
-        maxLength={30}
-      />
-      
-      <CustomTextInput
-        label="Phone"
-        stateHolder={{ setState: setFormData }}
-        stateFieldName="phone"
-        maxLength={20}
-      />
-      
-      <CustomTextInput
-        label="Address"
-        stateHolder={{ setState: setFormData }}
-        stateFieldName="address"
-        maxLength={100}
-      />
-      
-      <CustomTextInput
-        label="Website (optional)"
-        stateHolder={{ setState: setFormData }}
-        stateFieldName="website"
-        maxLength={100}
-      />
+      <View style={styles.pickerContainer}>
+        <Text style={styles.label}>Cuisine</Text>
+        <Picker
+          selectedValue={formData.cuisine}
+          onValueChange={(value) => setFormData({ ...formData, cuisine: value })}
+          style={styles.picker}
+        >
+          <Picker.Item label="American" value="American" />
+          <Picker.Item label="Chinese" value="Chinese" />
+          <Picker.Item label="Italian" value="Italian" />
+          <Picker.Item label="Mexican" value="Mexican" />
+          <Picker.Item label="Indian" value="Indian" />
+          <Picker.Item label="Japanese" value="Japanese" />
+          <Picker.Item label="Other" value="Other" />
+        </Picker>
+      </View>
       
       <View style={styles.pickerContainer}>
         <Text style={styles.label}>Stars</Text>
@@ -142,6 +131,28 @@ const AddScreen = ({ navigation }) => {
           <Picker.Item label="$$$$ (Very Expensive)" value="$$$$" />
         </Picker>
       </View>
+      
+      <CustomTextInput
+        label="Phone"
+        stateHolder={{ setState: setFormData }}
+        stateFieldName="phone"
+        maxLength={20}
+      />
+      
+      <CustomTextInput
+        label="Address"
+        stateHolder={{ setState: setFormData }}
+        stateFieldName="address"
+        maxLength={100}
+      />
+      
+      <CustomTextInput
+        label="Website (optional)"
+        stateHolder={{ setState: setFormData }}
+        stateFieldName="website"
+        maxLength={100}
+      />
+      
       <CustomButton
         text="Save Restaurant"
         onPress={saveRestaurant}

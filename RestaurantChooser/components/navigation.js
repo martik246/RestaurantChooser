@@ -1,15 +1,10 @@
 import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { NavigationContainer } from '@react-navigation/native';
+import { Image, Platform, StatusBar } from 'react-native';
 import PeopleScreen from '../screens/people/peopleScreen';
-import DecisionScreen from '../screens/decision/decisionScreen';
+import DecisionScreenNavigation from '../screens/decision/decisionScreenNavigation';
 import RestaurantsScreen from '../screens/restaurants/restaurantsScreen';
-import { Image } from 'react-native';
-import { Platform } from 'react-native';
-import Constants from 'expo-constants';
-import { StatusBar } from 'react-native';
-
-const platformOS = Platform.OS.toLowerCase();
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -20,12 +15,12 @@ export default function Navigation() {
       <NavigationContainer>
         <Tab.Navigator
           initialRouteName="Restaurants"
-          tabBarPosition="top"
           screenOptions={{
             animationEnabled: true,
             swipeEnabled: true,
             lazy: true,
-            tabBarActiveTintColor: 'red'
+            tabBarActiveTintColor: 'red',
+            tabBarPosition: Platform.OS === 'ios' ? 'bottom' : 'top'
           }}
         >
           <Tab.Screen
@@ -34,24 +29,24 @@ export default function Navigation() {
             options={{
               tabBarIcon: ({ color }) => (
                 <Image
-                  source={require('../assets/people.png')}
+                  source={require('../assets/icon-people.png')}
                   style={{ width: 24, height: 24 }}
                   tintColor={color}
                 />
-              )
+              ),
             }}
           />
           <Tab.Screen
             name="Decision"
-            component={DecisionScreen}
+            component={DecisionScreenNavigation}
             options={{
               tabBarIcon: ({ color }) => (
                 <Image
-                  source={require('../assets/decision.png')}
+                  source={require('../assets/icon-decision.png')}
                   style={{ width: 24, height: 24 }}
                   tintColor={color}
                 />
-              )
+              ),
             }}
           />
           <Tab.Screen
@@ -60,11 +55,11 @@ export default function Navigation() {
             options={{
               tabBarIcon: ({ color }) => (
                 <Image
-                  source={require('../assets/restaurants.png')}
+                  source={require('../assets/icon-restaurants.png')}
                   style={{ width: 24, height: 24 }}
                   tintColor={color}
                 />
-              )
+              ),
             }}
           />
         </Tab.Navigator>

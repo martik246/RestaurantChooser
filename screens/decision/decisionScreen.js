@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-export default function decisionScreen() {
+export default function DecisionScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.paragraph}>

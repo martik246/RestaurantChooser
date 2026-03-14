@@ -4,7 +4,7 @@ import AddScreen from './addScreen';
 
 const Stack = createStackNavigator();
 
-export default function peopleScreen() {
+export default function PeopleScreen() {
   return (
     <Stack.Navigator
       initialRouteName="PeopleList"

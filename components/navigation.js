@@ -1,7 +1,8 @@
 import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import { Image, Platform, StatusBar } from 'react-native';
+import { Image, Platform } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 import PeopleScreen from '../screens/people/peopleScreen';
 import DecisionScreenNavigation from '../screens/decision/decisionScreenNavigation';
 import RestaurantsScreen from '../screens/restaurants/restaurantsScreen';
@@ -19,6 +20,7 @@ export default function Navigation() {
             animationEnabled: true,
             swipeEnabled: true,
             lazy: true,
+            tabBarShowIcon: true,
             tabBarActiveTintColor: 'red',
             tabBarPosition: Platform.OS === 'ios' ? 'bottom' : 'top'
           }}
@@ -30,8 +32,7 @@ export default function Navigation() {
               tabBarIcon: ({ color }) => (
                 <Image
                   source={require('../assets/icon-people.png')}
-                  style={{ width: 24, height: 24 }}
-                  tintColor={color}
+                  style={{ width: 24, height: 24, tintColor: color }}
                 />
               ),
             }}
@@ -43,8 +44,7 @@ export default function Navigation() {
               tabBarIcon: ({ color }) => (
                 <Image
                   source={require('../assets/icon-decision.png')}
-                  style={{ width: 24, height: 24 }}
-                  tintColor={color}
+                  style={{ width: 24, height: 24, tintColor: color }}
                 />
               ),
             }}
@@ -56,8 +56,7 @@ export default function Navigation() {
               tabBarIcon: ({ color }) => (
                 <Image
                   source={require('../assets/icon-restaurants.png')}
-                  style={{ width: 24, height: 24 }}
-                  tintColor={color}
+                  style={{ width: 24, height: 24, tintColor: color }}
                 />
               ),
             }}

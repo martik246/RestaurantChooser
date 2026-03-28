@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import {
   Alert,
   FlatList,
+  Platform,
   StyleSheet,
   Text,
   View,
@@ -32,26 +33,41 @@ const ListScreen = ({ navigation }) => {
     }, [loadPeople])
   );
 
+  const performDeletePerson = async (id) => {
+    try {
+      const updatedPeople = people.filter((person) => person.key !== id);
+      await AsyncStorage.setItem('people', JSON.stringify(updatedPeople));
+      setPeople(updatedPeople);
+      Toast.show({
+        type: 'success',
+        text1: 'Person deleted',
+      });
+    } catch (error) {
+      Toast.show({
+        type: 'error',
+        text1: 'Failed to delete person',
+      });
+    }
+  };
+
   const deletePerson = (id) => {
+    if (Platform.OS === 'web') {
+      const isConfirmed = typeof window !== 'undefined'
+        ? window.confirm('Delete this person?')
+        : true;
+
+      if (isConfirmed) {
+        performDeletePerson(id);
+      }
+      return;
+    }
+
     Alert.alert('Delete Person', 'Are you sure?', [
       { text: 'Cancel', style: 'cancel' },
       {
         text: 'Yes',
-        onPress: async () => {
-          try {
-            const updatedPeople = people.filter((person) => person.key !== id);
-            await AsyncStorage.setItem('people', JSON.stringify(updatedPeople));
-            setPeople(updatedPeople);
-            Toast.show({
-              type: 'success',
-              text1: 'Person deleted',
-            });
-          } catch (error) {
-            Toast.show({
-              type: 'error',
-              text1: 'Failed to delete person',
-            });
-          }
+        onPress: () => {
+          performDeletePerson(id);
         },
       },
     ]);

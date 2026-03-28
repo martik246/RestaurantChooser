@@ -1,26 +1,42 @@
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import DecisionScreen from './decisionScreen';
+import WhosGoingScreen from './whosGoingScreen';
+import PreFiltersScreen from './preFiltersScreen';
+import ChoiceScreen from './choiceScreen';
+import PostChoiceScreen from './postChoiceScreen';
+
+const Stack = createStackNavigator();
 
 export default function DecisionScreenNavigation() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.paragraph}>
-        Decision Screen - Placeholder
-      </Text>
-    </View>
+    <Stack.Navigator
+      initialRouteName="DecisionTimeScreen"
+      screenOptions={{
+        // The assignment describes Decision as a self-contained screen flow.
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen
+        name="DecisionTimeScreen"
+        component={DecisionScreen}
+      />
+      <Stack.Screen
+        name="WhosGoingScreen"
+        component={WhosGoingScreen}
+      />
+      <Stack.Screen
+        name="PreFiltersScreen"
+        component={PreFiltersScreen}
+      />
+      <Stack.Screen
+        name="ChoiceScreen"
+        component={ChoiceScreen}
+      />
+      <Stack.Screen
+        name="PostChoiceScreen"
+        component={PostChoiceScreen}
+      />
+    </Stack.Navigator>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#ecf0f1',
-    padding: 8,
-  },
-  paragraph: {
-    margin: 24,
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-});

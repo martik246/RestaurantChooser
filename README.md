@@ -95,8 +95,3 @@ Finished Expo build link:
 
 `https://expo.dev/accounts/martik/projects/RestaurantChooser/builds/80f3c74c-5b4d-4c9a-9ab3-5a420e4b842f`
 
-## Notes for Submission
-
-- `eas.json` is included in the repository as required.
-- Screenshots are stored in the `ScreenShot` directory.
-- The final Expo build link should point to a build artifact with status `finished`.
